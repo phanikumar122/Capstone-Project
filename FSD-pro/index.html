@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crime Reporting App - Live Capture</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="fas fa-alert-circle"></i> CrimeAlert</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#dashboard" data-section="dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#report" data-section="report">Report Crime</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#feed" data-section="feed">Activity Feed</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light ms-2" id="themeToggle" title="Toggle Theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section py-5">
+            <div class="container">
+                <h1 class="display-4 mb-4"><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card stat-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Total Reports</h5>
+                                <p class="stat-number" id="totalReports">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card stat-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">This Week</h5>
+                                <p class="stat-number" id="weekReports">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card stat-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Most Common</h5>
+                                <p class="stat-text" id="commonCrime">N/A</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Recent Activity</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="recentActivityList">
+                            <p class="text-muted">No recent activity.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Report Crime Section -->
+        <section id="report" class="section py-5" style="display: none;">
+            <div class="container">
+                <h1 class="display-4 mb-4"><i class="fas fa-file-alt"></i> Report a Crime</h1>
+                
+                <div class="row">
+                    <!-- Media Capture Options -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Capture Media</h5>
+                            </div>
+                            <div class="card-body">
+                                <!-- Tabs for capture options -->
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <button class="nav-link active" id="cameraTab" data-bs-toggle="tab" data-bs-target="#cameraCapture">
+                                            <i class="fas fa-camera"></i> Camera
+                                        </button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="nav-link" id="videoTab" data-bs-toggle="tab" data-bs-target="#videoCapture">
+                                            <i class="fas fa-video"></i> Video
+                                        </button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="nav-link" id="uploadTab" data-bs-toggle="tab" data-bs-target="#uploadMedia">
+                                            <i class="fas fa-upload"></i> Upload
+                                        </button>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <!-- Camera Capture Tab -->
+                                    <div class="tab-pane fade show active" id="cameraCapture">
+                                        <div id="cameraPreview">
+                                            <video id="videoPreview" class="w-100 rounded mb-3" style="max-height: 300px; background: #000;"></video>
+                                        </div>
+                                        <div class="btn-group w-100 mb-3" role="group">
+                                            <button type="button" class="btn btn-primary" id="startCameraBtn">
+                                                <i class="fas fa-play"></i> Start Camera
+                                            </button>
+                                            <button type="button" class="btn btn-danger" id="stopCameraBtn" disabled>
+                                                <i class="fas fa-stop"></i> Stop Camera
+                                            </button>
+                                        </div>
+                                        <button type="button" class="btn btn-success w-100" id="capturePhotoBtn" disabled>
+                                            <i class="fas fa-camera"></i> Capture Photo
+                                        </button>
+                                    </div>
+
+                                    <!-- Video Recording Tab -->
+                                    <div class="tab-pane fade" id="videoCapture">
+                                        <div id="videoRecordPreview">
+                                            <video id="videoRecordPreview" class="w-100 rounded mb-3" style="max-height: 300px; background: #000;"></video>
+                                        </div>
+                                        <div class="btn-group w-100 mb-3" role="group">
+                                            <button type="button" class="btn btn-primary" id="startVideoBtn">
+                                                <i class="fas fa-play"></i> Start Recording
+                                            </button>
+                                            <button type="button" class="btn btn-danger" id="stopVideoBtn" disabled>
+                                                <i class="fas fa-stop"></i> Stop Recording
+                                            </button>
+                                        </div>
+                                        <div id="recordingTimer" class="alert alert-info" style="display: none;">
+                                            Recording: <span id="timerText">00:00</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- File Upload Tab -->
+                                    <div class="tab-pane fade" id="uploadMedia">
+                                        <div class="mb-3">
+                                            <label for="fileInput" class="form-label">Choose File (Image or Video)</label>
+                                            <input class="form-control form-control-lg" type="file" id="fileInput" accept="image/*,video/*">
+                                            <small class="text-muted">Max file size: 50MB</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Media Preview -->
+                                <div id="mediaPreviewContainer" style="display: none;" class="mt-3">
+                                    <label class="form-label">Media Preview:</label>
+                                    <div id="mediaPreview" class="rounded" style="max-height: 300px; overflow: hidden; background: #f0f0f0;">
+                                    </div>
+                                    <button type="button" class="btn btn-warning w-100 mt-3" id="clearMediaBtn">
+                                        <i class="fas fa-trash"></i> Clear Media
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Report Form -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Report Details</h5>
+                            </div>
+                            <div class="card-body">
+                                <form id="crimeForm">
+                                    <div class="mb-3">
+                                        <label for="crimeType" class="form-label">Crime Type <span class="text-danger">*</span></label>
+                                        <select class="form-select form-select-lg" id="crimeType" required>
+                                            <option value="">Select a crime type...</option>
+                                            <option value="theft">Theft</option>
+                                            <option value="assault">Assault</option>
+                                            <option value="robbery">Robbery</option>
+                                            <option value="vandalism">Vandalism</option>
+                                            <option value="fraud">Fraud</option>
+                                            <option value="burglary">Burglary</option>
+                                            <option value="hit_run">Hit & Run</option>
+                                            <option value="suspicious">Suspicious Activity</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="location" class="form-label">Location <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form-control-lg" id="location" placeholder="Enter location or address" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Description <span class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="description" rows="4" placeholder="Provide details about the incident..." required></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="anonymousReport" value="anonymous">
+                                            <label class="form-check-label" for="anonymousReport">
+                                                Report Anonymously
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success btn-lg w-100">
+                                        <i class="fas fa-paper-plane"></i> Submit Report
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity Feed Section -->
+        <section id="feed" class="section py-5" style="display: none;">
+            <div class="container">
+                <h1 class="display-4 mb-4"><i class="fas fa-stream"></i> Activity Feed</h1>
+
+                <!-- Filter and Search -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <select class="form-select" id="filterCrimeType">
+                            <option value="">All Crime Types</option>
+                            <option value="theft">Theft</option>
+                            <option value="assault">Assault</option>
+                            <option value="robbery">Robbery</option>
+                            <option value="vandalism">Vandalism</option>
+                            <option value="fraud">Fraud</option>
+                            <option value="burglary">Burglary</option>
+                            <option value="hit_run">Hit & Run</option>
+                            <option value="suspicious">Suspicious Activity</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="searchLocation" placeholder="Search by location...">
+                    </div>
+                </div>
+
+                <!-- Reports Feed -->
+                <div id="reportsFeed" class="row">
+                    <div class="col-12">
+                        <p class="text-center text-muted py-4">No crime reports yet. Be the first to report!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modals -->
+    <!-- Alert Modal -->
+    <div class="modal fade" id="alertModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alertTitle">Alert</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="alertMessage"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="utils/storage.js"></script>
+    <script src="utils/helpers.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

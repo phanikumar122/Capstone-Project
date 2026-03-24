@@ -1,0 +1,475 @@
+:root {
+    --primary-color: #007bff;
+    --danger-color: #dc3545;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --dark-bg: #212529;
+    --light-bg: #f8f9fa;
+    --text-dark: #212529;
+    --text-light: #6c757d;
+    --border-color: #dee2e6;
+}
+
+/* Light Theme */
+body {
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Dark Theme */
+body.dark-theme {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+body.dark-theme .navbar {
+    background-color: #0d0d0d !important;
+}
+
+body.dark-theme .card {
+    background-color: #2a2a2a;
+    border-color: #404040;
+    color: #e0e0e0;
+}
+
+body.dark-theme .card-header {
+    background-color: #3a3a3a !important;
+    border-color: #404040;
+}
+
+body.dark-theme .form-control,
+body.dark-theme .form-select,
+body.dark-theme textarea {
+    background-color: #333;
+    color: #e0e0e0;
+    border-color: #404040;
+}
+
+body.dark-theme .form-control:focus,
+body.dark-theme .form-select:focus {
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+body.dark-theme .nav-tabs {
+    border-color: #404040;
+}
+
+body.dark-theme .nav-tabs .nav-link {
+    color: #999;
+}
+
+body.dark-theme .nav-tabs .nav-link.active {
+    color: #e0e0e0;
+    background-color: #3a3a3a;
+    border-color: #404040 #404040 #2a2a2a;
+}
+
+body.dark-theme .alert-info {
+    background-color: #3a4a5a;
+    color: #e0e0e0;
+    border-color: #4a5a6a;
+}
+
+body.dark-theme .text-muted {
+    color: #999 !important;
+}
+
+body.dark-theme .btn-outline-light {
+    color: #e0e0e0;
+    border-color: #e0e0e0;
+}
+
+body.dark-theme .btn-outline-light:hover {
+    background-color: #e0e0e0;
+    color: #1a1a1a;
+}
+
+/* Layout */
+.main-content {
+    min-height: calc(100vh - 56px);
+}
+
+section {
+    scroll-margin-top: 80px;
+}
+
+/* Navigation */
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.navbar-brand i {
+    margin-right: 0.5rem;
+}
+
+/* Cards and Stats */
+.stat-card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0.5rem 0;
+}
+
+.stat-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--success-color);
+    margin: 0.5rem 0;
+}
+
+/* Forms */
+.form-control-lg,
+.form-select-lg {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+}
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-group {
+    gap: 0.5rem;
+}
+
+.btn-group .btn {
+    border-radius: 0.5rem;
+}
+
+/* Video Preview */
+#videoPreview,
+#videoRecordPreview {
+    border: 2px solid var(--border-color);
+    object-fit: cover;
+}
+
+body.dark-theme #videoPreview,
+body.dark-theme #videoRecordPreview {
+    border-color: #404040;
+}
+
+/* Crime Report Cards */
+.crime-card {
+    border: none;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.crime-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.crime-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.crime-card-media {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    background-color: #f0f0f0;
+}
+
+body.dark-theme .crime-card-media {
+    background-color: #1a1a1a;
+}
+
+.crime-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.badge-theft {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.badge-assault {
+    background-color: #ee5a6f;
+    color: white;
+}
+
+.badge-robbery {
+    background-color: #c92a2a;
+    color: white;
+}
+
+.badge-vandalism {
+    background-color: #f76707;
+    color: white;
+}
+
+.badge-fraud {
+    background-color: #fd7e14;
+    color: white;
+}
+
+.badge-burglary {
+    background-color: #a61e4d;
+    color: white;
+}
+
+.badge-hit_run {
+    background-color: #862e2e;
+    color: white;
+}
+
+.badge-suspicious {
+    background-color: #364d79;
+    color: white;
+}
+
+.badge-other {
+    background-color: #6c757d;
+    color: white;
+}
+
+.crime-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.meta-item i {
+    color: var(--primary-color);
+}
+
+/* Recent Activity List */
+#recentActivityList {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+body.dark-theme .activity-item {
+    border-bottom-color: #404040;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    min-width: 2rem;
+}
+
+.activity-text {
+    flex: 1;
+}
+
+.activity-time {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    margin-left: 1rem;
+}
+
+/* Alerts */
+.alert {
+    border-radius: 0.5rem;
+    border: none;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tab Content */
+.tab-content {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Media Preview */
+#mediaPreview img,
+#mediaPreview video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .crime-card {
+        margin-bottom: 1.5rem;
+    }
+
+    .crime-meta {
+        font-size: 0.85rem;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .btn-group .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .display-4 {
+        font-size: 1.5rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+
+    .stat-card {
+        margin-bottom: 1rem;
+    }
+
+    .stat-number {
+        font-size: 1.75rem;
+    }
+
+    .crime-card-media {
+        max-height: 250px;
+    }
+
+    .tab-pane {
+        padding: 0;
+    }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--text-light);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-dark);
+}
+
+body.dark-theme::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+body.dark-theme::-webkit-scrollbar-thumb {
+    background: #505050;
+}
+
+body.dark-theme::-webkit-scrollbar-thumb:hover {
+    background: #707070;
+}
+
+/* Animations */
+.loading {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Utility Classes */
+.text-truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.text-truncate-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Transition */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
